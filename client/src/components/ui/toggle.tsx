@@ -24,7 +24,7 @@ const toggleVariants = cva(
       size: "default",
     },
   }
-)
+) 
 
 const Toggle = React.forwardRef<
   React.ElementRef<typeof TogglePrimitive.Root>,
