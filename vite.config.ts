@@ -9,18 +9,14 @@ export default defineConfig({
     runtimeErrorOverlay(),
     ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID
       ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer()
-          ),
-          await import("@replit/vite-plugin-dev-banner").then((m) =>
-            m.devBanner()
-          ),
+          (await import("@replit/vite-plugin-cartographer")).cartographer(),
+          (await import("@replit/vite-plugin-dev-banner")).devBanner(),
         ]
       : []),
   ],
   resolve: {
     alias: [
-      // Universal catch-all for all "@/..." imports
+      // Catch-all for "@/..." imports
       { find: /^@\//, replacement: path.resolve(__dirname, "client/src") + "/" },
       { find: "@shared", replacement: path.resolve(__dirname, "shared") },
       { find: "@assets", replacement: path.resolve(__dirname, "attached_assets") },
@@ -28,7 +24,8 @@ export default defineConfig({
   },
   root: path.resolve(__dirname, "client"),
   build: {
-    outDir: path.resolve(__dirname, "dist/public"),
+    // Vercel expects "dist" as the root output folder
+    outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
   },
   server: {
