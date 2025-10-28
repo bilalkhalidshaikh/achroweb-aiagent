@@ -7,7 +7,8 @@ export function parseBookingInput(input: string): InsertBooking | null {
     const lowerInput = input.toLowerCase();
     
     // Extract client name (look for "for [name]" pattern)
-    const nameMatch = input.match(/(?:book|schedule|create)(?:\s+a\s+booking)?\s+for\s+([a-z]+(?:\s+[a-z]+)?)/i);
+    // More flexible pattern to handle "book a meeting for", "book for", "schedule for", etc.
+    const nameMatch = input.match(/(?:book|schedule|create)(?:\s+a\s+(?:meeting|booking|call|appointment))?\s+for\s+([a-z]+(?:\s+[a-z]+)?)/i);
     if (!nameMatch) return null;
     const clientName = nameMatch[1].trim();
 
