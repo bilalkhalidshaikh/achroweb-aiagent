@@ -27,11 +27,15 @@ import { BookingCard } from "@/components/booking-card";
 import { AIOrb } from "@/components/ai-orb";
 import { parseBookingInput } from "@/lib/booking-parser";
 import { localStorageService } from "@/lib/local-storage";
+import { mockVoiceLogs } from "@shared/voice-logs-schema";
+import { VoiceLogCard } from "@/components/voice-log-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Dashboard() {
   const [bookingInput, setBookingInput] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isVapiModalOpen, setIsVapiModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("bookings");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -231,60 +235,95 @@ export default function Dashboard() {
             />
           </div>
 
-          {/* Bookings Section */}
+          {/* Tabbed Content Section */}
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold font-display">
-                Live Bookings
-              </h2>
-              <Badge variant="outline" className="gap-2" data-testid="badge-booking-count">
-                <TrendingUp className="w-3 h-3" />
-                {bookings.length} Total
-              </Badge>
-            </div>
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+              <div className="flex items-center justify-between mb-6">
+                <TabsList className="glass-strong" data-testid="tabs-list">
+                  <TabsTrigger value="bookings" className="gap-2" data-testid="tab-bookings">
+                    <Calendar className="w-4 h-4" />
+                    Live Bookings
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {bookings.length}
+                    </Badge>
+                  </TabsTrigger>
+                  <TabsTrigger value="voice-logs" className="gap-2" data-testid="tab-voice-logs">
+                    <Phone className="w-4 h-4" />
+                    Voice Logs
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {mockVoiceLogs.length}
+                    </Badge>
+                  </TabsTrigger>
+                </TabsList>
+              </div>
 
-            {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <Card key={i} className="glass p-6 animate-pulse" data-testid={`skeleton-${i}`}>
-                    <div className="h-4 bg-muted rounded w-3/4 mb-3" />
-                    <div className="h-3 bg-muted rounded w-1/2 mb-2" />
-                    <div className="h-3 bg-muted rounded w-2/3" />
+              <TabsContent value="bookings" className="mt-0 space-y-4">
+                {isLoading ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {[1, 2, 3, 4].map((i) => (
+                      <Card key={i} className="glass p-6 animate-pulse" data-testid={`skeleton-${i}`}>
+                        <div className="h-4 bg-muted rounded w-3/4 mb-3" />
+                        <div className="h-3 bg-muted rounded w-1/2 mb-2" />
+                        <div className="h-3 bg-muted rounded w-2/3" />
+                      </Card>
+                    ))}
+                  </div>
+                ) : bookings.length === 0 ? (
+                  <Card className="glass-strong p-12 text-center" data-testid="card-empty-state">
+                    <div className="flex justify-center mb-4">
+                      <AIOrb size="lg" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">No Bookings Yet</h3>
+                    <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
+                      Start by simulating a booking above or launch the Voice Agent to see the system in action.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setBookingInput("Book for Alex at 2 PM tomorrow for AI Consultation");
+                        }}
+                        className="gap-2"
+                        data-testid="button-try-example"
+                      >
+                        <Sparkles className="w-4 h-4" />
+                        Try Example Booking
+                      </Button>
+                    </div>
                   </Card>
-                ))}
-              </div>
-            ) : bookings.length === 0 ? (
-              <Card className="glass-strong p-12 text-center" data-testid="card-empty-state">
-                <div className="flex justify-center mb-4">
-                  <AIOrb size="lg" />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">No Bookings Yet</h3>
-                <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-                  Start by simulating a booking above or launch the Voice Agent to see the system in action.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setBookingInput("Book for Alex at 2 PM tomorrow for AI Consultation");
-                    }}
-                    className="gap-2"
-                    data-testid="button-try-example"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    Try Example Booking
-                  </Button>
-                </div>
-              </Card>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {bookings
-                  .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-                  .map((booking, index) => (
-                    <BookingCard key={booking.id} booking={booking} index={index} />
-                  ))}
-              </div>
-            )}
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {bookings
+                      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                      .map((booking, index) => (
+                        <BookingCard key={booking.id} booking={booking} index={index} />
+                      ))}
+                  </div>
+                )}
+              </TabsContent>
+
+              <TabsContent value="voice-logs" className="mt-0 space-y-4">
+                {mockVoiceLogs.length === 0 ? (
+                  <Card className="glass-strong p-12 text-center">
+                    <div className="flex justify-center mb-4">
+                      <Phone className="w-12 h-12 text-muted-foreground" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">No Voice Logs</h3>
+                    <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                      Voice call transcripts and sentiment analysis will appear here.
+                    </p>
+                  </Card>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {mockVoiceLogs
+                      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+                      .map((log, index) => (
+                        <VoiceLogCard key={log.id} log={log} index={index} />
+                      ))}
+                  </div>
+                )}
+              </TabsContent>
+            </Tabs>
           </div>
         </main>
       </div>
