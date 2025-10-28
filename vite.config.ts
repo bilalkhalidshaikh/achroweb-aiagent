@@ -16,16 +16,14 @@ export default defineConfig({
   ],
   resolve: {
     alias: [
-      // Catch-all for "@/..." imports
       { find: /^@\//, replacement: path.resolve(__dirname, "client/src") + "/" },
       { find: "@shared", replacement: path.resolve(__dirname, "shared") },
       { find: "@assets", replacement: path.resolve(__dirname, "attached_assets") },
     ],
   },
-  root: path.resolve(__dirname, "client"),
+  root: path.resolve(__dirname, "client"),  // keep root as client
   build: {
-    // Vercel expects "dist" as the root output folder
-    outDir: path.resolve(__dirname, "dist"),
+    outDir: path.resolve(__dirname, "dist"), // IMPORTANT: move build output to root/dist
     emptyOutDir: true,
   },
   server: {
