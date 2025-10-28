@@ -1,4 +1,4 @@
-import logoImage from '@assets/logo3_1761682961764.png';
+import logoImage from '../../assets/logo3_1761682961764.png';
 
 interface AIOrbProps {
   size?: "sm" | "md" | "lg";
