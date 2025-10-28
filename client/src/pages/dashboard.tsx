@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, apiRequest } from "@/lib/queryClient";
+import { queryClient, apiRequest } from "../lib/queryClient";
 import type { Booking, InsertBooking } from "@shared/schema";
 import { BOOKING_STATUSES, SERVICE_TYPES } from "@shared/schema";
 import { Button } from "@/components/ui/button";

@@ -20,6 +20,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: [
+      // Universal catch-all for all "@/..." imports
       { find: /^@\//, replacement: path.resolve(__dirname, "client/src") + "/" },
       { find: "@shared", replacement: path.resolve(__dirname, "shared") },
       { find: "@assets", replacement: path.resolve(__dirname, "attached_assets") },
