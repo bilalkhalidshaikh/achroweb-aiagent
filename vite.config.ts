@@ -7,17 +7,23 @@ export default defineConfig({
   plugins: [
     react(),
     runtimeErrorOverlay(),
+    ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID
+      ? [
+          await import("@replit/vite-plugin-cartographer").then((m) =>
+            m.cartographer()
+          ),
+          await import("@replit/vite-plugin-dev-banner").then((m) =>
+            m.devBanner()
+          ),
+        ]
+      : []),
   ],
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "client/src"),
-      "@shared": path.resolve(__dirname, "shared"),
-      "@assets": path.resolve(__dirname, "attached_assets"),
-      "@lib": path.resolve(__dirname, "client/src/lib"),
-      "@components": path.resolve(__dirname, "client/src/components"),
-      "@hooks": path.resolve(__dirname, "client/src/hooks"),
-      "@ui": path.resolve(__dirname, "client/src/components/ui"),
-    },
+    alias: [
+      { find: /^@\//, replacement: path.resolve(__dirname, "client/src") + "/" },
+      { find: "@shared", replacement: path.resolve(__dirname, "shared") },
+      { find: "@assets", replacement: path.resolve(__dirname, "attached_assets") },
+    ],
   },
   root: path.resolve(__dirname, "client"),
   build: {
