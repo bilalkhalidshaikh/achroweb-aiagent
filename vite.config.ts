@@ -23,7 +23,7 @@ export default defineConfig({
     ],
   },
   build: {
-    outDir: path.resolve(__dirname, "client/dist"), // inside client folder
+    outDir: path.resolve(__dirname, "client/dist"),
     emptyOutDir: true,
   },
   server: {
