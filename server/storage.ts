@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type Booking, type InsertBooking } from "@shared/schema";
+import { type User, type InsertUser, type Booking, type InsertBooking } from "../shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {

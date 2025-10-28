@@ -1,6 +1,6 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import type { VoiceLog } from "@shared/voice-logs-schema";
+import { Card } from "./ui/card";
+import { Badge } from "./ui/badge";
+import type { VoiceLog } from "../../../shared/voice-logs-schema";
 import { Phone, Clock, User, TrendingUp, TrendingDown, Minus, CheckCircle2, AlertCircle, XCircle, HelpCircle } from "lucide-react";
 import { format, formatDistance } from "date-fns";
 

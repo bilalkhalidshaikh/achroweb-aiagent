@@ -1,4 +1,4 @@
-import type { Booking } from "@shared/schema";
+import type { Booking } from "../../../shared/schema";
 
 const BOOKINGS_KEY = "achroweb_bookings";
 

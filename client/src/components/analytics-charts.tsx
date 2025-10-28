@@ -1,5 +1,5 @@
-import { Card } from "@/components/ui/card";
-import type { Booking } from "@shared/schema";
+import { Card } from "./ui/card";
+import type { Booking } from "../../../shared/schema";
 import { LineChart, Line, AreaChart, Area, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { format, subDays, startOfDay, isAfter, isBefore } from "date-fns";
 

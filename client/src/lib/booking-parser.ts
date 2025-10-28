@@ -1,6 +1,6 @@
 import { add, parse, isToday, isTomorrow, nextDay, setHours, setMinutes } from "date-fns";
-import type { InsertBooking } from "@shared/schema";
-import { BOOKING_STATUSES, SERVICE_TYPES } from "@shared/schema";
+import type { InsertBooking } from "../../../shared/schema";
+import { BOOKING_STATUSES, SERVICE_TYPES } from "../../../shared/schema";
 
 export function parseBookingInput(input: string): InsertBooking | null {
   try {

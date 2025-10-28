@@ -1,7 +1,7 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import type { Booking } from "@shared/schema";
-import { BOOKING_STATUSES } from "@shared/schema";
+import { Card } from "./ui/card";
+import { Badge } from "./ui/badge";
+import type { Booking } from "../../../shared/schema";
+import { BOOKING_STATUSES } from "../../../shared/schema";
 import { Calendar, Clock, User, Briefcase } from "lucide-react";
 import { format } from "date-fns";
 
