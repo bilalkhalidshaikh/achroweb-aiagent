@@ -30,6 +30,8 @@ import { localStorageService } from "@/lib/local-storage";
 import { mockVoiceLogs } from "@shared/voice-logs-schema";
 import { VoiceLogCard } from "@/components/voice-log-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AnalyticsCharts } from "@/components/analytics-charts";
+import { BarChart3 } from "lucide-react";
 
 export default function Dashboard() {
   const [bookingInput, setBookingInput] = useState("");
@@ -254,6 +256,10 @@ export default function Dashboard() {
                       {mockVoiceLogs.length}
                     </Badge>
                   </TabsTrigger>
+                  <TabsTrigger value="analytics" className="gap-2" data-testid="tab-analytics">
+                    <BarChart3 className="w-4 h-4" />
+                    Analytics
+                  </TabsTrigger>
                 </TabsList>
               </div>
 
@@ -321,6 +327,22 @@ export default function Dashboard() {
                         <VoiceLogCard key={log.id} log={log} index={index} />
                       ))}
                   </div>
+                )}
+              </TabsContent>
+
+              <TabsContent value="analytics" className="mt-0">
+                {bookings.length === 0 ? (
+                  <Card className="glass-strong p-12 text-center">
+                    <div className="flex justify-center mb-4">
+                      <BarChart3 className="w-12 h-12 text-muted-foreground" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">No Analytics Data</h3>
+                    <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                      Analytics and insights will appear here once you have booking data.
+                    </p>
+                  </Card>
+                ) : (
+                  <AnalyticsCharts bookings={bookings} />
                 )}
               </TabsContent>
             </Tabs>
