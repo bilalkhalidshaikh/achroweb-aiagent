@@ -20,13 +20,14 @@ export default defineConfig({
       : []),
   ],
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./client/src"),
-      "@shared": path.resolve(__dirname, "./shared"),
-      "@assets": path.resolve(__dirname, "./attached_assets"),
-      "@/components": path.resolve(__dirname, "./client/src/components"),
-      "@/hooks": path.resolve(__dirname, "./client/src/hooks"),
-      },
+    alias: [
+      { find: "@", replacement: path.resolve(__dirname, "client/src") },
+      { find: "@shared", replacement: path.resolve(__dirname, "shared") },
+      { find: "@assets", replacement: path.resolve(__dirname, "attached_assets") },
+      { find: "@/components", replacement: path.resolve(__dirname, "client/src/components") },
+      { find: "@/hooks", replacement: path.resolve(__dirname, "client/src/hooks") },
+      { find: "@/ui", replacement: path.resolve(__dirname, "client/src/components/ui") },
+    ],
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
