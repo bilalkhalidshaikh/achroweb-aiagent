@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "../lib/queryClient";
-import type { Booking, InsertBooking } from "@shared/schema";
-import { BOOKING_STATUSES, SERVICE_TYPES } from "@shared/schema";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
+import type { Booking, InsertBooking } from "../../../shared/schema";
+import { BOOKING_STATUSES, SERVICE_TYPES } from "../../../shared/schema";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Badge } from "../components/ui/badge";
+import { Card } from "../components/ui/card";
+import { useToast } from "../hooks/use-toast";
 import { 
   Calendar, 
   Clock, 
@@ -21,16 +21,16 @@ import {
   Mic2
 } from "lucide-react";
 import { format, parseISO } from "date-fns";
-import { VapiModal } from "@/components/vapi-modal";
-import { StatsCard } from "@/components/stats-card";
-import { BookingCard } from "@/components/booking-card";
-import { AIOrb } from "@/components/ai-orb";
-import { parseBookingInput } from "@/lib/booking-parser";
-import { localStorageService } from "@/lib/local-storage";
-import { mockVoiceLogs } from "@shared/voice-logs-schema";
-import { VoiceLogCard } from "@/components/voice-log-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AnalyticsCharts } from "@/components/analytics-charts";
+import { VapiModal } from "../components/vapi-modal";
+import { StatsCard } from "../components/stats-card";
+import { BookingCard } from "../components/booking-card";
+import { AIOrb } from "../components/ai-orb";
+import { parseBookingInput } from "../lib/booking-parser";
+import { localStorageService } from "../lib/local-storage";
+import { mockVoiceLogs } from "../../../shared/voice-logs-schema";
+import { VoiceLogCard } from "../components/voice-log-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { AnalyticsCharts } from "../components/analytics-charts";
 import { BarChart3 } from "lucide-react";
 
 export default function Dashboard() {
