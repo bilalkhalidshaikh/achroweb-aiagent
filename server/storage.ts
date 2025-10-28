@@ -52,7 +52,12 @@ export class MemStorage implements IStorage {
     sampleBookings.forEach((booking) => {
       const id = randomUUID();
       const createdAt = new Date();
-      this.bookings.set(id, { ...booking, id, createdAt });
+      this.bookings.set(id, { 
+        ...booking, 
+        id, 
+        createdAt,
+        notes: booking.notes ?? null,
+      });
     });
   }
 
@@ -84,7 +89,12 @@ export class MemStorage implements IStorage {
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {
     const id = randomUUID();
     const createdAt = new Date();
-    const booking: Booking = { ...insertBooking, id, createdAt };
+    const booking: Booking = { 
+      ...insertBooking, 
+      id, 
+      createdAt,
+      notes: insertBooking.notes ?? null,
+    };
     this.bookings.set(id, booking);
     return booking;
   }

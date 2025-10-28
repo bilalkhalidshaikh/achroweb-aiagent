@@ -12,7 +12,7 @@ export function parseBookingInput(input: string): InsertBooking | null {
     const clientName = nameMatch[1].trim();
 
     // Extract service type
-    let serviceType = SERVICE_TYPES.AI_CONSULTATION; // default
+    let serviceType: string = SERVICE_TYPES.AI_CONSULTATION; // default
     if (lowerInput.includes("automation")) {
       serviceType = SERVICE_TYPES.AUTOMATION_SETUP;
     } else if (lowerInput.includes("voice") || lowerInput.includes("demo")) {
@@ -46,7 +46,7 @@ export function parseBookingInput(input: string): InsertBooking | null {
       const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
       for (let i = 0; i < days.length; i++) {
         if (lowerInput.includes(days[i])) {
-          bookingDate = nextDay(new Date(), i + 1);
+          bookingDate = nextDay(new Date(), (i + 1) as 0 | 1 | 2 | 3 | 4 | 5 | 6);
           break;
         }
       }
