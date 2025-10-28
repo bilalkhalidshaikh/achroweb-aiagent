@@ -5,12 +5,12 @@
       {
         "src": "client/package.json",
         "use": "@vercel/static-build",
-        "config": { "distDir": "dist" } // <-- inside client
+        "config": { "distDir": "dist" }
       }
     ],
     "routes": [
       { "src": "/api/(.*)", "dest": "server/index.ts" },
-      { "src": "/(.*)", "dest": "/index.html" } // SPA routing
+      { "src": "/(.*)", "dest": "/index.html" }
     ]
   }
   
