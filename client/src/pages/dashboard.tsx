@@ -26,6 +26,7 @@ import { StatsCard } from "@/components/stats-card";
 import { BookingCard } from "@/components/booking-card";
 import { AIOrb } from "@/components/ai-orb";
 import { parseBookingInput } from "@/lib/booking-parser";
+import { localStorageService } from "@/lib/local-storage";
 
 export default function Dashboard() {
   const [bookingInput, setBookingInput] = useState("");
@@ -44,12 +45,20 @@ export default function Dashboard() {
     queryKey: ["/api/bookings"],
   });
 
+  // Sync bookings to localStorage whenever they change
+  useEffect(() => {
+    if (bookings.length > 0) {
+      localStorageService.saveBookings(bookings);
+    }
+  }, [bookings]);
+
   const createBookingMutation = useMutation({
     mutationFn: async (booking: InsertBooking) => {
       return apiRequest("POST", "/api/bookings", booking);
     },
-    onSuccess: () => {
+    onSuccess: (newBooking: Booking) => {
       queryClient.invalidateQueries({ queryKey: ["/api/bookings"] });
+      localStorageService.addBooking(newBooking);
       setBookingInput("");
       toast({
         title: "Booking Created",
