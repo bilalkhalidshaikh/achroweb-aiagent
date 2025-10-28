@@ -1,0 +1,62 @@
+You are a senior AI engineer at Achroweb Solutions, building a live interactive demo dashboard that connects to the following Vapi voice agent:
+🔗 https://vapi.ai?demo=true&shareKey=738a9d89-3707-4f15-b1bd-836557d10561&assistantId=8c95d084-15b5-4593-a770-bc1091b2d414
+
+Goal: Build a stunning, futuristic “AI Booking System” demo that looks alive — as if the Vapi agent is performing real booking operations and logging each one into the dashboard.
+
+Core Functionalities:
+
+When a booking occurs (simulated or test input), automatically log:
+
+Client name
+
+Date and time of booking
+
+Service type (AI Consultation, Automation Setup, etc.)
+
+Booking status (Confirmed / Rescheduled / Canceled)
+
+Store these logs locally (JSON or localStorage).
+
+Display them beautifully in a minimal dashboard UI.
+
+Include an input field to simulate a new booking (e.g. “Book for John at 4 PM tomorrow”) — the system parses it and adds it to logs.
+
+Add a “Play Demo Voice” button that opens the Vapi assistant demo in a popup or new tab.
+
+Visual / Design Instructions:
+
+Clean, elegant, professional — Achroweb x Agentic AI aesthetic.
+
+Use a dark futuristic UI with neon-blue and glassy tones.
+
+Branding header:
+
+Achroweb Solutions — Agentic Booking Intelligence
+“Turning Conversations into Confirmations.”
+
+
+Responsive and mobile-friendly.
+
+Include subtle AI motion effects (pulsing lights, gradient animations, etc.)
+
+Technical Requirements:
+
+Stack: HTML + CSS + JavaScript (React optional).
+
+Save bookings locally for demo purposes.
+
+All actions happen on the front-end — no backend required.
+
+Simulate Vapi responses visually (e.g. “Booking confirmed for Sean tomorrow at 3 PM”).
+
+Optional Enhancements (if time permits):
+
+Add “Voice Logs” tab showing recent conversations or mock transcriptions.
+
+Include a live timestamp on the dashboard.
+
+Add Achroweb logo animation or intro fade effect.
+
+Final Note:
+
+This demo is meant to impress investors and clients like Andy, showing the Achroweb voice AI integrated into an autonomous system. Make it feel premium, intelligent, and alive — like a system from the future.
