@@ -23,9 +23,10 @@ export default defineConfig({
     ],
   },
   build: {
-    outDir: path.resolve(__dirname, "client/dist"),
-    emptyOutDir: true,
+    outDir: path.resolve(__dirname, "client/dist"), // generate inside client
+    emptyOutDir: true
   },
+  
   server: {
     fs: { strict: true, deny: ["**/.*"] },
   },
